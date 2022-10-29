@@ -11,11 +11,11 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension UISegmentedControl {
+public extension CombineCocoa where Base: UISegmentedControl {
     /// A publisher emitting selected segment index changes for this segmented control.
-    var selectedSegmentIndexPublisher: AnyPublisher<Int, Never> {
-        Publishers.ControlProperty(control: self, events: .defaultValueEvents, keyPath: \.selectedSegmentIndex)
-                  .eraseToAnyPublisher()
+    var selectedSegmentIndex: AnyPublisher<Int, Never> {
+        Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.selectedSegmentIndex)
+            .eraseToAnyPublisher()
     }
 }
 #endif

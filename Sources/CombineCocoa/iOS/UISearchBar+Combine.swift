@@ -12,9 +12,9 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base == UISearchBar {
+public extension CombineCocoa where Base: UISearchBar {
     /// Combine wrapper for `UISearchBarDelegate.searchBar(_:textDidChange:)`
-    var textDidChangePublisher: AnyPublisher<String, Never> {
+    var textDidChange: AnyPublisher<String, Never> {
         let selector = #selector(UISearchBarDelegate.searchBar(_:textDidChange:))
         return delegateProxy
             .interceptSelectorPublisher(selector)
@@ -23,7 +23,7 @@ public extension CombineCocoa where Base == UISearchBar {
     }
 
     /// Combine wrapper for `UISearchBarDelegate.searchBarSearchButtonClicked(_:)`
-    var searchButtonClickedPublisher: AnyPublisher<Void, Never> {
+    var searchButtonClicked: AnyPublisher<Void, Never> {
         let selector = #selector(UISearchBarDelegate.searchBarSearchButtonClicked(_:))
         return delegateProxy
             .interceptSelectorPublisher(selector)
@@ -32,7 +32,7 @@ public extension CombineCocoa where Base == UISearchBar {
     }
 
     /// Combine wrapper for `UISearchBarDelegate.searchBarCancelButtonClicked(_:)`
-    var cancelButtonClickedPublisher: AnyPublisher<Void, Never> {
+    var cancelButtonClicked: AnyPublisher<Void, Never> {
         let selector = #selector(UISearchBarDelegate.searchBarCancelButtonClicked(_:))
         return delegateProxy
             .interceptSelectorPublisher(selector)
@@ -45,6 +45,7 @@ public extension CombineCocoa where Base == UISearchBar {
     }
 }
 
+@available(iOS 13.0, *)
 extension UISearchBar: HasDelegate {}
 
 @available(iOS 13.0, *)

@@ -11,10 +11,10 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension UIPageControl {
+public extension CombineCocoa where Base: UIPageControl {
     /// A publisher emitting current page changes for this page control.
-    var currentPagePublisher: AnyPublisher<Int, Never> {
-        publisher(for: \.currentPage).eraseToAnyPublisher()
+    var currentPage: AnyPublisher<Int, Never> {
+        base.publisher(for: \.currentPage).eraseToAnyPublisher()
     }
 }
 #endif

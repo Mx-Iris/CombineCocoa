@@ -6,12 +6,19 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if !(os(iOS) && (arch(i386) || arch(arm)))
+#if canImport(AppKit)
+import AppKit
+#elseif canImport(UIKit)
 import UIKit
+#endif
+
 import Combine
 
-@available(iOS 13.0, *)
-public extension CombineCocoa where Base == NSTextStorage {
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension NSTextStorage: HasPublishers {}
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension CombineCocoa where Base: NSTextStorage {
     /// Combine publisher for `NSTextStorageDelegate.textStorage(_:didProcessEditing:range:changeInLength:)`
     var didProcessEditingRangeChangeInLengthPublisher: AnyPublisher<(editedMask: NSTextStorage.EditActions, editedRange: NSRange, delta: Int), Never> {
         let selector = #selector(NSTextStorageDelegate.textStorage(_:didProcessEditing:range:changeInLength:))
@@ -34,19 +41,19 @@ public extension CombineCocoa where Base == NSTextStorage {
     }
 }
 
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension NSTextStorage: HasDelegate {}
-
-extension NSTextStorage: HasPublishers {}
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 private class NSTextStorageDelegateProxy: DelegateProxy<NSTextStorage, NSTextStorageDelegate>, NSTextStorageDelegate, DelegateProxyType {
     typealias Object = NSTextStorage
+
     typealias Delegate = NSTextStorageDelegate
 
     weak var object: Object?
+
     required init(object: Object) {
         self.object = object
         super.init(object: object)
     }
 }
-#endif

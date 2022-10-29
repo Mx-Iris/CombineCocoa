@@ -12,9 +12,9 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base == UIScrollView {
+public extension CombineCocoa where Base: UIScrollView {
     /// A publisher emitting content offset changes from this UIScrollView.
-    var contentOffsetPublisher: AnyPublisher<CGPoint, Never> {
+    var contentOffset: AnyPublisher<CGPoint, Never> {
         base.publisher(for: \.contentOffset)
             .eraseToAnyPublisher()
     }
@@ -24,8 +24,8 @@ public extension CombineCocoa where Base == UIScrollView {
     /// - parameter offset: A threshold indicating how close to the bottom of the UIScrollView this publisher should emit.
     ///                     Defaults to 0
     /// - returns: A publisher that emits when the bottom of the UIScrollView is reached within the provided threshold.
-    func reachedBottomPublisher(offset: CGFloat = 0) -> AnyPublisher<Void, Never> {
-        contentOffsetPublisher
+    func reachedBottom(offset: CGFloat = 0) -> AnyPublisher<Void, Never> {
+        contentOffset
             .map { [weak self] contentOffset -> Bool in
                 guard let self = self?.base else { return false }
                 let visibleHeight = self.frame.height - self.contentInset.top - self.contentInset.bottom
@@ -40,7 +40,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewDidScroll(_:)`
-    var didScrollPublisher: AnyPublisher<Void, Never> {
+    var didScroll: AnyPublisher<Void, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewDidScroll(_:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { _ in () }
@@ -48,7 +48,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewWillBeginDecelerating(_:)`
-    var willBeginDeceleratingPublisher: AnyPublisher<Void, Never> {
+    var willBeginDecelerating: AnyPublisher<Void, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewWillBeginDecelerating(_:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { _ in () }
@@ -56,7 +56,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewDidEndDecelerating(_:)`
-    var didEndDeceleratingPublisher: AnyPublisher<Void, Never> {
+    var didEndDecelerating: AnyPublisher<Void, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewDidEndDecelerating(_:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { _ in () }
@@ -64,7 +64,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewWillBeginDragging(_:)`
-    var willBeginDraggingPublisher: AnyPublisher<Void, Never> {
+    var willBeginDragging: AnyPublisher<Void, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewWillBeginDragging(_:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { _ in () }
@@ -72,7 +72,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewWillEndDragging(_:withVelocity:targetContentOffset:)`
-    var willEndDraggingPublisher: AnyPublisher<(velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>), Never> {
+    var willEndDragging: AnyPublisher<(velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>), Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewWillEndDragging(_:withVelocity:targetContentOffset:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { values in
@@ -85,7 +85,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewDidEndDragging(_:willDecelerate:)`
-    var didEndDraggingPublisher: AnyPublisher<Bool, Never> {
+    var didEndDragging: AnyPublisher<Bool, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewDidEndDragging(_:willDecelerate:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! Bool }
@@ -93,7 +93,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewDidZoom(_:)`
-    var didZoomPublisher: AnyPublisher<Void, Never> {
+    var didZoom: AnyPublisher<Void, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewDidZoom(_:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { _ in () }
@@ -101,7 +101,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewDidScrollToTop(_:)`
-    var didScrollToTopPublisher: AnyPublisher<Void, Never> {
+    var didScrollToTop: AnyPublisher<Void, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewDidScrollToTop(_:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { _ in () }
@@ -109,7 +109,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewDidEndScrollingAnimation(_:)`
-    var didEndScrollingAnimationPublisher: AnyPublisher<Void, Never> {
+    var didEndScrollingAnimation: AnyPublisher<Void, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewDidEndScrollingAnimation(_:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { _ in () }
@@ -117,7 +117,7 @@ public extension CombineCocoa where Base == UIScrollView {
     }
 
     /// Combine wrapper for `scrollViewWillBeginZooming(_:with:)`
-    var willBeginZoomingPublisher: AnyPublisher<UIView?, Never> {
+    var willBeginZooming: AnyPublisher<UIView?, Never> {
         let selector = #selector(UIScrollViewDelegate.scrollViewWillBeginZooming(_:with:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! UIView? }
@@ -132,7 +132,7 @@ public extension CombineCocoa where Base == UIScrollView {
             .eraseToAnyPublisher()
     }
 
-    var delegateProxy: DelegateProxy<UIScrollView, UIScrollViewDelegate> {
+    private var delegateProxy: DelegateProxy<UIScrollView, UIScrollViewDelegate> {
         ScrollViewDelegateProxy.createDelegateProxy(for: base)
     }
 }
@@ -142,19 +142,16 @@ extension UIScrollView: HasDelegate {
 }
 
 @available(iOS 13.0, *)
-public class ScrollViewDelegateProxy: DelegateProxy<UIScrollView, UIScrollViewDelegate>, UIScrollViewDelegate, DelegateProxyType {
-    
+private class ScrollViewDelegateProxy: DelegateProxy<UIScrollView, UIScrollViewDelegate>, UIScrollViewDelegate, DelegateProxyType {
     public typealias Object = UIScrollView
     public typealias Delegate = UIScrollViewDelegate
-    
+
     public required init(object: Object) {
         self.object = object
         super.init(object: object)
     }
-    
-    public private(set) weak var object: Object?
 
+    public private(set) weak var object: Object?
 }
 #endif
 // swiftlint:enable force_cast
-

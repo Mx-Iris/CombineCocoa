@@ -11,11 +11,11 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension UISwitch {
+public extension CombineCocoa where Base: UISwitch {
     /// A publisher emitting on status changes for this switch.
-    var isOnPublisher: AnyPublisher<Bool, Never> {
-        Publishers.ControlProperty(control: self, events: .defaultValueEvents, keyPath: \.isOn)
-                  .eraseToAnyPublisher()
+    var isOn: AnyPublisher<Bool, Never> {
+        Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.isOn)
+            .eraseToAnyPublisher()
     }
 }
 #endif

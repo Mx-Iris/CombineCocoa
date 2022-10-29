@@ -11,59 +11,60 @@ import Combine
 import UIKit
 
 // MARK: - Gesture Publishers
+
 @available(iOS 13.0, *)
-public extension UITapGestureRecognizer {
+public extension CombineCocoa where Base: UITapGestureRecognizer {
     /// A publisher which emits when this Tap Gesture Recognizer is triggered
-    var tapPublisher: AnyPublisher<UITapGestureRecognizer, Never> {
-        gesturePublisher(for: self)
+    var tap: AnyPublisher<UITapGestureRecognizer, Never> {
+        gesturePublisher(for: base)
     }
 }
 
 @available(iOS 13.0, *)
-public extension UIPinchGestureRecognizer {
+public extension CombineCocoa where Base: UIPinchGestureRecognizer {
     /// A publisher which emits when this Pinch Gesture Recognizer is triggered
-    var pinchPublisher: AnyPublisher<UIPinchGestureRecognizer, Never> {
-        gesturePublisher(for: self)
+    var pinch: AnyPublisher<UIPinchGestureRecognizer, Never> {
+        gesturePublisher(for: base)
     }
 }
 
 @available(iOS 13.0, *)
-public extension UIRotationGestureRecognizer {
+public extension CombineCocoa where Base: UIRotationGestureRecognizer {
     /// A publisher which emits when this Rotation Gesture Recognizer is triggered
-    var rotationPublisher: AnyPublisher<UIRotationGestureRecognizer, Never> {
-        gesturePublisher(for: self)
+    var rotation: AnyPublisher<UIRotationGestureRecognizer, Never> {
+        gesturePublisher(for: base)
     }
 }
 
 @available(iOS 13.0, *)
-public extension UISwipeGestureRecognizer {
+public extension CombineCocoa where Base: UISwipeGestureRecognizer {
     /// A publisher which emits when this Swipe Gesture Recognizer is triggered
-    var swipePublisher: AnyPublisher<UISwipeGestureRecognizer, Never> {
-        gesturePublisher(for: self)
+    var swipe: AnyPublisher<UISwipeGestureRecognizer, Never> {
+        gesturePublisher(for: base)
     }
 }
 
 @available(iOS 13.0, *)
-public extension UIPanGestureRecognizer {
+public extension CombineCocoa where Base: UIPanGestureRecognizer {
     /// A publisher which emits when this Pan Gesture Recognizer is triggered
-    var panPublisher: AnyPublisher<UIPanGestureRecognizer, Never> {
-        gesturePublisher(for: self)
+    var pan: AnyPublisher<UIPanGestureRecognizer, Never> {
+        gesturePublisher(for: base)
     }
 }
 
 @available(iOS 13.0, *)
-public extension UIScreenEdgePanGestureRecognizer {
+public extension CombineCocoa where Base: UIScreenEdgePanGestureRecognizer {
     /// A publisher which emits when this Screen Edge Gesture Recognizer is triggered
-    var screenEdgePanPublisher: AnyPublisher<UIScreenEdgePanGestureRecognizer, Never> {
-        gesturePublisher(for: self)
+    var screenEdgePan: AnyPublisher<UIScreenEdgePanGestureRecognizer, Never> {
+        gesturePublisher(for: base)
     }
 }
 
 @available(iOS 13.0, *)
-public extension UILongPressGestureRecognizer {
+public extension CombineCocoa where Base: UILongPressGestureRecognizer {
     /// A publisher which emits when this Long Press Recognizer is triggered
-    var longPressPublisher: AnyPublisher<UILongPressGestureRecognizer, Never> {
-        gesturePublisher(for: self)
+    var longPress: AnyPublisher<UILongPressGestureRecognizer, Never> {
+        gesturePublisher(for: base)
     }
 }
 
@@ -73,15 +74,17 @@ public extension UILongPressGestureRecognizer {
 // generic publisher whenever its specific event occurs.
 @available(iOS 13.0, *)
 private func gesturePublisher<Gesture: UIGestureRecognizer>(for gesture: Gesture) -> AnyPublisher<Gesture, Never> {
-    Publishers.ControlTarget(control: gesture,
-                             addTargetAction: { gesture, target, action in
-                                gesture.addTarget(target, action: action)
-                             },
-                             removeTargetAction: { gesture, target, action in
-                                gesture?.removeTarget(target, action: action)
-                             })
-              .subscribe(on: DispatchQueue.main)
-              .map { gesture }
-              .eraseToAnyPublisher()
+    Publishers.ControlTarget(
+        control: gesture,
+        addTargetAction: { gesture, target, action in
+            gesture.addTarget(target, action: action)
+        },
+        removeTargetAction: { gesture, target, action in
+            gesture?.removeTarget(target, action: action)
+        }
+    )
+    .subscribe(on: DispatchQueue.main)
+    .map { gesture }
+    .eraseToAnyPublisher()
 }
 #endif

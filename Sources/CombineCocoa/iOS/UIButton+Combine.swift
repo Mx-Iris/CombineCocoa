@@ -6,15 +6,17 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if !(os(iOS) && (arch(i386) || arch(arm)))
+#if canImport(UIKit)
+
 import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension UIButton {
+public extension CombineCocoa where Base: UIButton {
     /// A publisher emitting tap events from this button.
-    var tapPublisher: AnyPublisher<Void, Never> {
+    var tap: AnyPublisher<Void, Never> {
         controlEventPublisher(for: .touchUpInside)
     }
 }
+
 #endif

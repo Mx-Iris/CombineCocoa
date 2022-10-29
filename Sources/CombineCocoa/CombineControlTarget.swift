@@ -11,6 +11,7 @@ import Combine
 import Foundation
 
 // MARK: - Publisher
+
 @available(iOS 13.0, *)
 public extension Combine.Publishers {
     /// A publisher which wraps objects that use the Target & Action mechanism,
@@ -35,19 +36,23 @@ public extension Combine.Publishers {
         ///                              responsible to add the target action to the provided control.
         /// - parameter removeTargetAction: A function which accepts the Control, a Target and a Selector and it
         ///                                 responsible to remove the target action from the provided control.
-        public init(control: Control,
-                    addTargetAction: @escaping (Control, AnyObject, Selector) -> Void,
-                    removeTargetAction: @escaping (Control?, AnyObject, Selector) -> Void) {
+        public init(
+            control: Control,
+            addTargetAction: @escaping (Control, AnyObject, Selector) -> Void,
+            removeTargetAction: @escaping (Control?, AnyObject, Selector) -> Void
+        ) {
             self.control = control
             self.addTargetAction = addTargetAction
             self.removeTargetAction = removeTargetAction
         }
 
         public func receive<S: Subscriber>(subscriber: S) where S.Failure == Failure, S.Input == Output {
-            let subscription = Subscription(subscriber: subscriber,
-                                            control: control,
-                                            addTargetAction: addTargetAction,
-                                            removeTargetAction: removeTargetAction)
+            let subscription = Subscription(
+                subscriber: subscriber,
+                control: control,
+                addTargetAction: addTargetAction,
+                removeTargetAction: removeTargetAction
+            )
 
             subscriber.receive(subscription: subscription)
         }
@@ -55,19 +60,22 @@ public extension Combine.Publishers {
 }
 
 // MARK: - Subscription
+
 @available(iOS 13.0, *)
 private extension Combine.Publishers.ControlTarget {
     private final class Subscription<S: Subscriber, Control: AnyObject>: Combine.Subscription where S.Input == Void {
         private var subscriber: S?
-        weak private var control: Control?
+        private weak var control: Control?
 
         private let removeTargetAction: (Control?, AnyObject, Selector) -> Void
         private let action = #selector(handleAction)
 
-        init(subscriber: S,
-             control: Control,
-             addTargetAction: @escaping (Control, AnyObject, Selector) -> Void,
-             removeTargetAction: @escaping (Control?, AnyObject, Selector) -> Void) {
+        init(
+            subscriber: S,
+            control: Control,
+            addTargetAction: @escaping (Control, AnyObject, Selector) -> Void,
+            removeTargetAction: @escaping (Control?, AnyObject, Selector) -> Void
+        ) {
             self.subscriber = subscriber
             self.control = control
             self.removeTargetAction = removeTargetAction

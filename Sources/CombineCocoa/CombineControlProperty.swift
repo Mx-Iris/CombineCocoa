@@ -12,6 +12,7 @@ import Foundation
 import UIKit.UIControl
 
 // MARK: - Publisher
+
 @available(iOS 13.0, *)
 public extension Combine.Publishers {
     /// A Control Property is a publisher that emits the value at the provided keypath
@@ -31,19 +32,23 @@ public extension Combine.Publishers {
         /// - parameter control: UI Control.
         /// - parameter events: Control Events.
         /// - parameter keyPath: A Key Path from the UI Control to the requested value.
-        public init(control: Control,
-                    events: Control.Event,
-                    keyPath: KeyPath<Control, Value>) {
+        public init(
+            control: Control,
+            events: Control.Event,
+            keyPath: KeyPath<Control, Value>
+        ) {
             self.control = control
             self.controlEvents = events
             self.keyPath = keyPath
         }
 
         public func receive<S: Subscriber>(subscriber: S) where S.Failure == Failure, S.Input == Output {
-            let subscription = Subscription(subscriber: subscriber,
-                                            control: control,
-                                            event: controlEvents,
-                                            keyPath: keyPath)
+            let subscription = Subscription(
+                subscriber: subscriber,
+                control: control,
+                event: controlEvents,
+                keyPath: keyPath
+            )
 
             subscriber.receive(subscription: subscription)
         }
@@ -51,11 +56,12 @@ public extension Combine.Publishers {
 }
 
 // MARK: - Subscription
+
 @available(iOS 13.0, *)
 extension Combine.Publishers.ControlProperty {
     private final class Subscription<S: Subscriber, Control: UIControl, Value>: Combine.Subscription where S.Input == Value {
         private var subscriber: S?
-        weak private var control: Control?
+        private weak var control: Control?
         let keyPath: KeyPath<Control, Value>
         private var didEmitInitial = false
         private let event: Control.Event
@@ -71,9 +77,9 @@ extension Combine.Publishers.ControlProperty {
         func request(_ demand: Subscribers.Demand) {
             // Emit initial value upon first demand request
             if !didEmitInitial,
-                demand > .none,
-                let control = control,
-                let subscriber = subscriber {
+               demand > .none,
+               let control = control,
+               let subscriber = subscriber {
                 _ = subscriber.receive(control[keyPath: keyPath])
                 didEmitInitial = true
             }

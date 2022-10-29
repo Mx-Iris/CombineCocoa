@@ -7,7 +7,6 @@
 //
 
 #if canImport(UIKit) && !(os(iOS) && (arch(i386) || arch(arm)))
-import Foundation
 import UIKit
 import Combine
 
@@ -15,7 +14,7 @@ extension UITableView: HasPublishers {}
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base == UITableView {
+public extension CombineCocoa where Base: UITableView {
     /// Combine wrapper for `tableView(_:willDisplay:forRowAt:)`
     var willDisplayCell: AnyPublisher<(cell: UITableViewCell, indexPath: IndexPath), Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))
@@ -131,11 +130,11 @@ public extension CombineCocoa where Base == UITableView {
             }
             .eraseToAnyPublisher()
     }
-    
+
     private var dataSourceProxy: TableViewDataSourceProxy {
         .createDelegateProxy(for: base)
     }
-    
+
     private var delegateProxy: TableViewDelegateProxy {
         .createDelegateProxy(for: base)
     }
@@ -149,6 +148,7 @@ class TableViewDataSourceNotSet: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         0
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         .init()
     }
@@ -159,45 +159,44 @@ private let tableViewDataSourceNotSet = TableViewDataSourceNotSet()
 @available(iOS 13.0, *)
 private class TableViewDataSourceProxy: DelegateProxy<UITableView, UITableViewDataSource>, DelegateProxyType, UITableViewDataSource {
     weak var object: UITableView?
-    
+
     weak var requiredMethodsDataSource: UITableViewDataSource?
-    
+
     required init(object: UITableView) {
         self.object = object
         super.init(object: object)
     }
-    
+
     override func setForwardToDelegate(_ delegate: UITableViewDataSource?) {
         requiredMethodsDataSource = delegate
         super.setForwardToDelegate(delegate)
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         (requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, numberOfRowsInSection: section)
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         (requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, cellForRowAt: indexPath)
     }
 }
-
 
 @available(iOS 13.0, *)
 private class TableViewDelegateProxy: DelegateProxy<UITableView, UITableViewDelegate>, UITableViewDelegate, DelegateProxyType {
     func currentDelegate() -> Delegate? {
         object?.delegate
     }
-    
+
     func setCurrentDelegate(_ delegate: Delegate?) {
         object?.delegate = delegate
     }
-    
+
     typealias Object = UITableView
-    
+
     typealias Delegate = UITableViewDelegate
-    
+
     weak var object: UITableView?
-    
+
     required init(object: UITableView) {
         self.object = object
         super.init(object: object)

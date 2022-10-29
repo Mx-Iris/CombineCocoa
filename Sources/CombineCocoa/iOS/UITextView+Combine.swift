@@ -11,24 +11,24 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
-public extension UITextView {
-  /// A Combine publisher for the `UITextView's` value.
-  ///
-  /// - note: This uses the underlying `NSTextStorage` to make sure
-  ///         autocorrect changes are reflected as well.
-  ///
-  /// - seealso: https://git.io/JJM5Q
-  var valuePublisher: AnyPublisher<String?, Never> {
-    Deferred { [weak textView = self] in
-        textView?.textStorage.publishers
-        .didProcessEditingRangeChangeInLengthPublisher
-        .map { _ in textView?.text }
-        .prepend(textView?.text)
-        .eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+public extension CombineCocoa where Base: UITextView {
+    /// A Combine publisher for the `UITextView's` value.
+    ///
+    /// - note: This uses the underlying `NSTextStorage` to make sure
+    ///         autocorrect changes are reflected as well.
+    ///
+    /// - seealso: https://git.io/JJM5Q
+    var value: AnyPublisher<String?, Never> {
+        Deferred { [weak textView = base] in
+            textView?.textStorage.publishers
+                .didProcessEditingRangeChangeInLengthPublisher
+                .map { _ in textView?.text }
+                .prepend(textView?.text)
+                .eraseToAnyPublisher() ?? Empty().eraseToAnyPublisher()
+        }
+        .eraseToAnyPublisher()
     }
-    .eraseToAnyPublisher()
-  }
 
-  var textPublisher: AnyPublisher<String?, Never> { valuePublisher }
+    var text: AnyPublisher<String?, Never> { value }
 }
 #endif

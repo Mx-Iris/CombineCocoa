@@ -11,11 +11,11 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension UIStepper {
+public extension CombineCocoa where Base: UIStepper {
     /// A publisher emitting value changes for this stepper.
-    var valuePublisher: AnyPublisher<Double, Never> {
-        Publishers.ControlProperty(control: self, events: .defaultValueEvents, keyPath: \.value)
-                  .eraseToAnyPublisher()
+    var value: AnyPublisher<Double, Never> {
+        Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.value)
+            .eraseToAnyPublisher()
     }
 }
 #endif

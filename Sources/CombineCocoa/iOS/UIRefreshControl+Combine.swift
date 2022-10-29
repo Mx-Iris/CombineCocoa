@@ -11,11 +11,11 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension UIRefreshControl {
+public extension CombineCocoa where Base: UIRefreshControl {
     /// A publisher emitting refresh status changes from this refresh control.
-    var isRefreshingPublisher: AnyPublisher<Bool, Never> {
-        Publishers.ControlProperty(control: self, events: .defaultValueEvents, keyPath: \.isRefreshing)
-                  .eraseToAnyPublisher()
+    var isRefreshing: AnyPublisher<Bool, Never> {
+        Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.isRefreshing)
+            .eraseToAnyPublisher()
     }
 }
 #endif

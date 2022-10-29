@@ -11,11 +11,11 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension UISlider {
+public extension CombineCocoa where Base: UISlider {
     /// A publisher emitting value changes for this slider.
-    var valuePublisher: AnyPublisher<Float, Never> {
-        Publishers.ControlProperty(control: self, events: .defaultValueEvents, keyPath: \.value)
-                  .eraseToAnyPublisher()
+    var value: AnyPublisher<Float, Never> {
+        Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.value)
+            .eraseToAnyPublisher()
     }
 }
 #endif
