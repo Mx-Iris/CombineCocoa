@@ -15,6 +15,10 @@ extension UITableView: HasPublishers {}
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
 public extension CombineCocoa where Base: UITableView {
+    var delegateProxy: TableViewDelegateProxy {
+        .createDelegateProxy(for: base)
+    }
+
     /// Combine wrapper for `tableView(_:willDisplay:forRowAt:)`
     var willDisplayCell: AnyPublisher<(cell: UITableViewCell, indexPath: IndexPath), Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))
@@ -118,89 +122,38 @@ public extension CombineCocoa where Base: UITableView {
             .map { $0[1] as! IndexPath }
             .eraseToAnyPublisher()
     }
+}
 
-    var itemDeletedIndexPath: AnyPublisher<IndexPath, Never> {
+@available(iOS 13.0, *)
+public extension CombineCocoa where Base: UITableView {
+    var dataSourceProxy: TableViewDataSourceProxy {
+        .createDelegateProxy(for: base)
+    }
+
+    var itemDeleted: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
         return dataSourceProxy.interceptSelectorPublisher(selector)
-            .filter {
-                UITableViewCell.EditingStyle(rawValue: ($0[1] as! NSNumber).intValue) == .delete
-            }
-            .map {
-                $0[2] as! IndexPath
-            }
+            .filter { UITableViewCell.EditingStyle(rawValue: ($0[1] as! NSNumber).intValue) == .delete }
+            .map { $0[2] as! IndexPath }
             .eraseToAnyPublisher()
     }
-
-    private var dataSourceProxy: TableViewDataSourceProxy {
-        .createDelegateProxy(for: base)
+    
+    var itemMoved: AnyPublisher<(source: IndexPath, destination: IndexPath), Never> {
+        let selector = #selector(UITableViewDataSource.tableView(_:moveRowAt:to:))
+        return dataSourceProxy.interceptSelectorPublisher(selector)
+            .map { ($0[1] as! IndexPath, $0[2] as! IndexPath) }
+            .eraseToAnyPublisher()
     }
-
-    private var delegateProxy: TableViewDelegateProxy {
-        .createDelegateProxy(for: base)
+    
+    var itemInserted: AnyPublisher<IndexPath, Never> {
+        let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
+        return dataSourceProxy.interceptSelectorPublisher(selector)
+            .filter { UITableViewCell.EditingStyle(rawValue: ($0[1] as! NSNumber).intValue) == .insert }
+            .map { $0[2] as! IndexPath }
+            .eraseToAnyPublisher()
     }
+    
 }
 
-extension UITableView: HasDataSource {
-    public typealias DataSource = UITableViewDataSource
-}
-
-class TableViewDataSourceNotSet: NSObject, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        .init()
-    }
-}
-
-private let tableViewDataSourceNotSet = TableViewDataSourceNotSet()
-
-@available(iOS 13.0, *)
-private class TableViewDataSourceProxy: DelegateProxy<UITableView, UITableViewDataSource>, DelegateProxyType, UITableViewDataSource {
-    weak var object: UITableView?
-
-    weak var requiredMethodsDataSource: UITableViewDataSource?
-
-    required init(object: UITableView) {
-        self.object = object
-        super.init(object: object)
-    }
-
-    override func setForwardToDelegate(_ delegate: UITableViewDataSource?) {
-        requiredMethodsDataSource = delegate
-        super.setForwardToDelegate(delegate)
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        (requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, numberOfRowsInSection: section)
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        (requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, cellForRowAt: indexPath)
-    }
-}
-
-@available(iOS 13.0, *)
-private class TableViewDelegateProxy: DelegateProxy<UITableView, UITableViewDelegate>, UITableViewDelegate, DelegateProxyType {
-    func currentDelegate() -> Delegate? {
-        object?.delegate
-    }
-
-    func setCurrentDelegate(_ delegate: Delegate?) {
-        object?.delegate = delegate
-    }
-
-    typealias Object = UITableView
-
-    typealias Delegate = UITableViewDelegate
-
-    weak var object: UITableView?
-
-    required init(object: UITableView) {
-        self.object = object
-        super.init(object: object)
-    }
-}
 #endif
 // swiftlint:enable force_cast

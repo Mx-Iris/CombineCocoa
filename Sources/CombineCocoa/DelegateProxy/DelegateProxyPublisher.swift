@@ -10,16 +10,16 @@ import Foundation
 import Combine
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-internal class DelegateProxyPublisher<Output>: Publisher {
-    typealias Failure = Never
+public class DelegateProxyPublisher<Output>: Publisher {
+    public typealias Failure = Never
 
     private let handler: (AnySubscriber<Output, Failure>) -> Void
 
-    init(_ handler: @escaping (AnySubscriber<Output, Failure>) -> Void) {
+    public init(_ handler: @escaping (AnySubscriber<Output, Failure>) -> Void) {
         self.handler = handler
     }
 
-    func receive<S>(subscriber: S) where S: Subscriber, Failure == S.Failure, Output == S.Input {
+    public func receive<S>(subscriber: S) where S: Subscriber, Failure == S.Failure, Output == S.Input {
         let subscription = Subscription(subscriber: AnySubscriber(subscriber), handler: handler)
         subscriber.receive(subscription: subscription)
     }
