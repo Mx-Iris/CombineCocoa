@@ -11,11 +11,13 @@ import Foundation
 import UIKit
 import Combine
 
+extension UITableView: HasPublishers {}
+
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension UITableView {
+public extension CombineCocoa where Base == UITableView {
     /// Combine wrapper for `tableView(_:willDisplay:forRowAt:)`
-    var willDisplayCellPublisher: AnyPublisher<(cell: UITableViewCell, indexPath: IndexPath), Never> {
+    var willDisplayCell: AnyPublisher<(cell: UITableViewCell, indexPath: IndexPath), Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:willDisplay:forRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { ($0[1] as! UITableViewCell, $0[2] as! IndexPath) }
@@ -23,7 +25,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:willDisplayHeaderView:forSection:)`
-    var willDisplayHeaderViewPublisher: AnyPublisher<(headerView: UIView, section: Int), Never> {
+    var willDisplayHeaderView: AnyPublisher<(headerView: UIView, section: Int), Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:willDisplayHeaderView:forSection:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { ($0[1] as! UIView, $0[2] as! Int) }
@@ -31,7 +33,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:willDisplayFooterView:forSection:)`
-    var willDisplayFooterViewPublisher: AnyPublisher<(footerView: UIView, section: Int), Never> {
+    var willDisplayFooterView: AnyPublisher<(footerView: UIView, section: Int), Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:willDisplayFooterView:forSection:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { ($0[1] as! UIView, $0[2] as! Int) }
@@ -39,7 +41,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:didEndDisplaying:forRowAt:)`
-    var didEndDisplayingCellPublisher: AnyPublisher<(cell: UITableViewCell, indexPath: IndexPath), Never> {
+    var didEndDisplayingCell: AnyPublisher<(cell: UITableViewCell, indexPath: IndexPath), Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:didEndDisplaying:forRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { ($0[1] as! UITableViewCell, $0[2] as! IndexPath) }
@@ -47,7 +49,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:didEndDisplayingHeaderView:forSection:)`
-    var didEndDisplayingHeaderViewPublisher: AnyPublisher<(headerView: UIView, section: Int), Never> {
+    var didEndDisplayingHeaderView: AnyPublisher<(headerView: UIView, section: Int), Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:didEndDisplayingHeaderView:forSection:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { ($0[1] as! UIView, $0[2] as! Int) }
@@ -63,7 +65,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:accessoryButtonTappedForRowWith:)`
-    var itemAccessoryButtonTappedPublisher: AnyPublisher<IndexPath, Never> {
+    var itemAccessoryButtonTapped: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:accessoryButtonTappedForRowWith:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! IndexPath }
@@ -71,7 +73,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:didHighlightRowAt:)`
-    var didHighlightRowPublisher: AnyPublisher<IndexPath, Never> {
+    var didHighlightRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:didHighlightRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! IndexPath }
@@ -79,7 +81,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:didUnHighlightRowAt:)`
-    var didUnhighlightRowPublisher: AnyPublisher<IndexPath, Never> {
+    var didUnhighlightRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:didUnhighlightRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! IndexPath }
@@ -87,7 +89,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:didSelectRowAt:)`
-    var didSelectRowPublisher: AnyPublisher<IndexPath, Never> {
+    var didSelectRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:didSelectRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! IndexPath }
@@ -95,7 +97,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:didDeselectRowAt:)`
-    var didDeselectRowPublisher: AnyPublisher<IndexPath, Never> {
+    var didDeselectRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:didDeselectRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! IndexPath }
@@ -103,7 +105,7 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:willBeginEditingRowAt:)`
-    var willBeginEditingRowPublisher: AnyPublisher<IndexPath, Never> {
+    var willBeginEditingRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:willBeginEditingRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! IndexPath }
@@ -111,22 +113,94 @@ public extension UITableView {
     }
 
     /// Combine wrapper for `tableView(_:didEndEditingRowAt:)`
-    var didEndEditingRowPublisher: AnyPublisher<IndexPath, Never> {
+    var didEndEditingRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDelegate.tableView(_:didEndEditingRowAt:))
         return delegateProxy.interceptSelectorPublisher(selector)
             .map { $0[1] as! IndexPath }
             .eraseToAnyPublisher()
     }
 
-    override var delegateProxy: DelegateProxy {
-        TableViewDelegateProxy.createDelegateProxy(for: self)
+    var itemDeletedIndexPath: AnyPublisher<IndexPath, Never> {
+        let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
+        return dataSourceProxy.interceptSelectorPublisher(selector)
+            .filter {
+                UITableViewCell.EditingStyle(rawValue: ($0[1] as! NSNumber).intValue) == .delete
+            }
+            .map {
+                $0[2] as! IndexPath
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    private var dataSourceProxy: TableViewDataSourceProxy {
+        .createDelegateProxy(for: base)
+    }
+    
+    private var delegateProxy: TableViewDelegateProxy {
+        .createDelegateProxy(for: base)
     }
 }
 
+extension UITableView: HasDataSource {
+    public typealias DataSource = UITableViewDataSource
+}
+
+class TableViewDataSourceNotSet: NSObject, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        .init()
+    }
+}
+
+private let tableViewDataSourceNotSet = TableViewDataSourceNotSet()
+
 @available(iOS 13.0, *)
-private class TableViewDelegateProxy: DelegateProxy, UITableViewDelegate, DelegateProxyType {
-    func setDelegate(to object: UITableView) {
-        object.delegate = self
+private class TableViewDataSourceProxy: DelegateProxy<UITableView, UITableViewDataSource>, DelegateProxyType, UITableViewDataSource {
+    weak var object: UITableView?
+    
+    weak var requiredMethodsDataSource: UITableViewDataSource?
+    
+    required init(object: UITableView) {
+        self.object = object
+        super.init(object: object)
+    }
+    
+    override func setForwardToDelegate(_ delegate: UITableViewDataSource?) {
+        requiredMethodsDataSource = delegate
+        super.setForwardToDelegate(delegate)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        (requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        (requiredMethodsDataSource ?? tableViewDataSourceNotSet).tableView(tableView, cellForRowAt: indexPath)
+    }
+}
+
+
+@available(iOS 13.0, *)
+private class TableViewDelegateProxy: DelegateProxy<UITableView, UITableViewDelegate>, UITableViewDelegate, DelegateProxyType {
+    func currentDelegate() -> Delegate? {
+        object?.delegate
+    }
+    
+    func setCurrentDelegate(_ delegate: Delegate?) {
+        object?.delegate = delegate
+    }
+    
+    typealias Object = UITableView
+    
+    typealias Delegate = UITableViewDelegate
+    
+    weak var object: UITableView?
+    
+    required init(object: UITableView) {
+        self.object = object
+        super.init(object: object)
     }
 }
 #endif

@@ -6,35 +6,83 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if !(os(iOS) && (arch(i386) || arch(arm)))
 import Foundation
+import ObjectiveC.runtime
 
-private var associatedKey = "delegateProxy"
-
-public protocol DelegateProxyType {
-    associatedtype Object
-
-    func setDelegate(to object: Object)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public protocol DelegateProxyType: AnyObject {
+    associatedtype Object: AnyObject
+    associatedtype Delegate
+    var object: Object? { get }
+    static var identifier: UnsafeRawPointer { get }
+    init(object: Object)
+    func currentDelegate() -> Delegate?
+    func setCurrentDelegate(_ delegate: Delegate?)
+    func forwardToDelegate() -> Delegate?
+    func setForwardToDelegate(_ delegate: Delegate?)
 }
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-public extension DelegateProxyType where Self: DelegateProxy {
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension DelegateProxyType {
     static func createDelegateProxy(for object: Object) -> Self {
         objc_sync_enter(self)
         defer { objc_sync_exit(self) }
 
         let delegateProxy: Self
 
-        if let associatedObject = objc_getAssociatedObject(object, &associatedKey) as? Self {
+        if let associatedObject = objc_getAssociatedObject(object, identifier) as? Self {
             delegateProxy = associatedObject
         } else {
-            delegateProxy = .init()
-            objc_setAssociatedObject(object, &associatedKey, delegateProxy, .OBJC_ASSOCIATION_RETAIN)
+            delegateProxy = .init(object: object)
+            objc_setAssociatedObject(object, identifier, delegateProxy, .OBJC_ASSOCIATION_RETAIN)
         }
 
-        delegateProxy.setDelegate(to: object)
+        let currentDelegate = delegateProxy.currentDelegate()
+        delegateProxy.setForwardToDelegate(currentDelegate)
+        delegateProxy.setCurrentDelegate(delegateProxy as? Delegate)
 
         return delegateProxy
     }
 }
-#endif
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension DelegateProxyType {
+    static var identifier: UnsafeRawPointer {
+        let delegateIdentifier = ObjectIdentifier(Delegate.self)
+        let integerIdentifier = Int(bitPattern: delegateIdentifier)
+        return UnsafeRawPointer(bitPattern: integerIdentifier)!
+    }
+}
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public protocol HasDataSource: AnyObject {
+    associatedtype DataSource
+    var dataSource: DataSource? { set get }
+}
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public protocol HasDelegate: AnyObject {
+    associatedtype Delegate
+    var delegate: Delegate? { set get }
+}
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension DelegateProxyType where Object: HasDataSource, Self.Delegate == Object.DataSource {
+    func currentDelegate() -> Delegate? {
+        object?.dataSource
+    }
+    func setCurrentDelegate(_ delegate: Delegate?) {
+        object?.dataSource = delegate
+    }
+}
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+public extension DelegateProxyType where Object: HasDelegate, Self.Delegate == Object.Delegate {
+    func currentDelegate() -> Delegate? {
+        object?.delegate
+    }
+    func setCurrentDelegate(_ delegate: Delegate?) {
+        object?.delegate = delegate
+    }
+}
+
+

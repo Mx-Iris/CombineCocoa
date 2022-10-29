@@ -12,7 +12,7 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension UISearchBar {
+public extension CombineCocoa where Base == UISearchBar {
     /// Combine wrapper for `UISearchBarDelegate.searchBar(_:textDidChange:)`
     var textDidChangePublisher: AnyPublisher<String, Never> {
         let selector = #selector(UISearchBarDelegate.searchBar(_:textDidChange:))
@@ -41,14 +41,20 @@ public extension UISearchBar {
     }
 
     private var delegateProxy: UISearchBarDelegateProxy {
-        .createDelegateProxy(for: self)
+        .createDelegateProxy(for: base)
     }
 }
 
+extension UISearchBar: HasDelegate {}
+
 @available(iOS 13.0, *)
-private class UISearchBarDelegateProxy: DelegateProxy, UISearchBarDelegate, DelegateProxyType {
-    func setDelegate(to object: UISearchBar) {
-        object.delegate = self
+private class UISearchBarDelegateProxy: DelegateProxy<UISearchBar, UISearchBarDelegate>, UISearchBarDelegate, DelegateProxyType {
+    typealias Object = UISearchBar
+    typealias Delegate = UISearchBarDelegate
+    weak var object: UISearchBar?
+    required init(object: UISearchBar) {
+        self.object = object
+        super.init(object: object)
     }
 }
 #endif

@@ -13,7 +13,7 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension UICollectionView {
+public extension CombineCocoa where Base == UICollectionView {
    /// Combine wrapper for `collectionView(_:didSelectItemAt:)`
     var didSelectItemPublisher: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UICollectionViewDelegate.collectionView(_:didSelectItemAt:))
@@ -78,15 +78,27 @@ public extension UICollectionView {
             .eraseToAnyPublisher()
     }
 
-    override var delegateProxy: DelegateProxy {
-        CollectionViewDelegateProxy.createDelegateProxy(for: self)
+    private var delegateProxy: CollectionViewDelegateProxy {
+        .createDelegateProxy(for: base)
     }
 }
 
 @available(iOS 13.0, *)
-private class CollectionViewDelegateProxy: DelegateProxy, UICollectionViewDelegate, DelegateProxyType {
-    func setDelegate(to object: UICollectionView) {
-        object.delegate = self
+private class CollectionViewDelegateProxy: DelegateProxy<UICollectionView, UICollectionViewDelegate>, UICollectionViewDelegate, DelegateProxyType {
+    func currentDelegate() -> Delegate? {
+        object?.delegate
+    }
+    
+    func setCurrentDelegate(_ delegate: Delegate?) {
+        object?.delegate = delegate
+    }
+    
+    typealias Object = UICollectionView
+    typealias Delegate = UICollectionViewDelegate
+    weak var object: UICollectionView?
+    required init(object: UICollectionView) {
+        self.object = object
+        super.init(object: object)
     }
 }
 #endif

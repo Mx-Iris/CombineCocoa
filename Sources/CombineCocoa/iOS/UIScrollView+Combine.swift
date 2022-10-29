@@ -12,10 +12,10 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension UIScrollView {
+public extension CombineCocoa where Base == UIScrollView {
     /// A publisher emitting content offset changes from this UIScrollView.
     var contentOffsetPublisher: AnyPublisher<CGPoint, Never> {
-        publisher(for: \.contentOffset)
+        base.publisher(for: \.contentOffset)
             .eraseToAnyPublisher()
     }
 
@@ -27,7 +27,7 @@ public extension UIScrollView {
     func reachedBottomPublisher(offset: CGFloat = 0) -> AnyPublisher<Void, Never> {
         contentOffsetPublisher
             .map { [weak self] contentOffset -> Bool in
-                guard let self = self else { return false }
+                guard let self = self?.base else { return false }
                 let visibleHeight = self.frame.height - self.contentInset.top - self.contentInset.bottom
                 let yDelta = contentOffset.y + self.contentInset.top
                 let threshold = max(offset, self.contentSize.height - visibleHeight)
@@ -132,16 +132,28 @@ public extension UIScrollView {
             .eraseToAnyPublisher()
     }
 
-    @objc var delegateProxy: DelegateProxy {
-        ScrollViewDelegateProxy.createDelegateProxy(for: self)
+    var delegateProxy: DelegateProxy<UIScrollView, UIScrollViewDelegate> {
+        ScrollViewDelegateProxy.createDelegateProxy(for: base)
     }
 }
 
+extension UIScrollView: HasDelegate {
+    public typealias Delegate = UIScrollViewDelegate
+}
+
 @available(iOS 13.0, *)
-private class ScrollViewDelegateProxy: DelegateProxy, UIScrollViewDelegate, DelegateProxyType {
-    func setDelegate(to object: UIScrollView) {
-        object.delegate = self
+public class ScrollViewDelegateProxy: DelegateProxy<UIScrollView, UIScrollViewDelegate>, UIScrollViewDelegate, DelegateProxyType {
+    
+    public typealias Object = UIScrollView
+    public typealias Delegate = UIScrollViewDelegate
+    
+    public required init(object: Object) {
+        self.object = object
+        super.init(object: object)
     }
+    
+    public private(set) weak var object: Object?
+
 }
 #endif
 // swiftlint:enable force_cast

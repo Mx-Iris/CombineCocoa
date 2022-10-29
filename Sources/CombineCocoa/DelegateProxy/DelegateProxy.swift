@@ -14,15 +14,24 @@ import Combine
 import Runtime
 #endif
 
-@available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
-open class DelegateProxy: ObjcDelegateProxy {
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+open class DelegateProxy<Object: AnyObject, Delegate>: ObjcDelegateProxy {
     private var dict: [Selector: [([Any]) -> Void]] = [:]
     private var subscribers = [AnySubscriber<[Any], Never>?]()
-
-    public required override init() {
+    private weak var object: Object?
+    public required init(object: Object) {
+        self.object = object
         super.init()
     }
-
+    
+    public func forwardToDelegate() -> Delegate? {
+        self._forwardToDelegate as? Delegate
+    }
+    
+    public func setForwardToDelegate(_ delegate: Delegate?) {
+        self._setForwardToDelegate(delegate)
+    }
+    
     public override func interceptedSelector(_ selector: Selector, arguments: [Any]) {
         dict[selector]?.forEach { handler in
             handler(arguments)

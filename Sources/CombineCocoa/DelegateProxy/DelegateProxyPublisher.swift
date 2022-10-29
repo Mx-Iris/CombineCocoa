@@ -6,11 +6,10 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if !(os(iOS) && (arch(i386) || arch(arm)))
 import Foundation
 import Combine
 
-@available(iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 internal class DelegateProxyPublisher<Output>: Publisher {
     typealias Failure = Never
 
@@ -26,7 +25,7 @@ internal class DelegateProxyPublisher<Output>: Publisher {
     }
 }
 
-@available(iOS 13.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 private extension DelegateProxyPublisher {
     class Subscription<S>: Combine.Subscription where S: Subscriber, Failure == S.Failure, Output == S.Input {
         private var subscriber: S?
@@ -45,4 +44,4 @@ private extension DelegateProxyPublisher {
         }
     }
 }
-#endif
+

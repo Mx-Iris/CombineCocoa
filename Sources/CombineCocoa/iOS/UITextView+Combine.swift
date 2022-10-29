@@ -20,7 +20,7 @@ public extension UITextView {
   /// - seealso: https://git.io/JJM5Q
   var valuePublisher: AnyPublisher<String?, Never> {
     Deferred { [weak textView = self] in
-      textView?.textStorage
+        textView?.textStorage.publishers
         .didProcessEditingRangeChangeInLengthPublisher
         .map { _ in textView?.text }
         .prepend(textView?.text)
