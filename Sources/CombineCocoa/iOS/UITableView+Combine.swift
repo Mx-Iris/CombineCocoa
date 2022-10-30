@@ -130,7 +130,7 @@ public extension CombineCocoaPublishers where Base: UITableView {
         .createDelegateProxy(for: base)
     }
 
-    var deletedRow: AnyPublisher<IndexPath, Never> {
+    var didDeleteRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
         return dataSourceProxy.interceptSelectorPublisher(selector)
             .filter { UITableViewCell.EditingStyle(rawValue: ($0[1] as! NSNumber).intValue) == .delete }
@@ -138,14 +138,14 @@ public extension CombineCocoaPublishers where Base: UITableView {
             .eraseToAnyPublisher()
     }
     
-    var movedRow: AnyPublisher<(source: IndexPath, destination: IndexPath), Never> {
+    var didMoveRow: AnyPublisher<(source: IndexPath, destination: IndexPath), Never> {
         let selector = #selector(UITableViewDataSource.tableView(_:moveRowAt:to:))
         return dataSourceProxy.interceptSelectorPublisher(selector)
             .map { ($0[1] as! IndexPath, $0[2] as! IndexPath) }
             .eraseToAnyPublisher()
     }
     
-    var insertedRow: AnyPublisher<IndexPath, Never> {
+    var didInsertRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
         return dataSourceProxy.interceptSelectorPublisher(selector)
             .filter { UITableViewCell.EditingStyle(rawValue: ($0[1] as! NSNumber).intValue) == .insert }
