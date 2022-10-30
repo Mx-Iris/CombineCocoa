@@ -13,7 +13,7 @@ import UIKit
 extension UIControl: HasPublishers {}
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIControl {
+public extension CombineCocoaPublishers where Base: UIControl {
     /// A publisher emitting events from this control.
     func controlEventPublisher(for events: UIControl.Event) -> AnyPublisher<Void, Never> {
         Publishers.ControlEvent(control: base, events: events)

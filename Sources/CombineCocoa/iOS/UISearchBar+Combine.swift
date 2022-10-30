@@ -12,7 +12,7 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UISearchBar {
+public extension CombineCocoaPublishers where Base: UISearchBar {
     /// Combine wrapper for `UISearchBarDelegate.searchBar(_:textDidChange:)`
     var textDidChange: AnyPublisher<String, Never> {
         let selector = #selector(UISearchBarDelegate.searchBar(_:textDidChange:))

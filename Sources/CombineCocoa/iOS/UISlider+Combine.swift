@@ -11,7 +11,7 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UISlider {
+public extension CombineCocoaPublishers where Base: UISlider {
     /// A publisher emitting value changes for this slider.
     var value: AnyPublisher<Float, Never> {
         Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.value)

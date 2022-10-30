@@ -11,7 +11,7 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIStepper {
+public extension CombineCocoaPublishers where Base: UIStepper {
     /// A publisher emitting value changes for this stepper.
     var value: AnyPublisher<Double, Never> {
         Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.value)

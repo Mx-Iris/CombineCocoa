@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class CombineCocoa<Base> {
+public class CombineCocoaPublishers<Base> {
     public let base: Base
     public init(base: Base) {
         self.base = base
@@ -16,17 +16,17 @@ public class CombineCocoa<Base> {
 
 public protocol HasPublishers {
     associatedtype Base
-    static var publishers: CombineCocoa<Base>.Type { get set }
-    var publishers: CombineCocoa<Base> { get set }
+    static var publishers: CombineCocoaPublishers<Base>.Type { get set }
+    var publishers: CombineCocoaPublishers<Base> { get set }
 }
 
 public extension HasPublishers {
-    static var publishers: CombineCocoa<Self>.Type {
-        get { CombineCocoa<Self>.self }
+    static var publishers: CombineCocoaPublishers<Self>.Type {
+        get { CombineCocoaPublishers<Self>.self }
         set {}
     }
 
-    var publishers: CombineCocoa<Self> {
+    var publishers: CombineCocoaPublishers<Self> {
         get { .init(base: self) }
         set {}
     }

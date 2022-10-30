@@ -11,7 +11,7 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIPageControl {
+public extension CombineCocoaPublishers where Base: UIPageControl {
     /// A publisher emitting current page changes for this page control.
     var currentPage: AnyPublisher<Int, Never> {
         base.publisher(for: \.currentPage).eraseToAnyPublisher()

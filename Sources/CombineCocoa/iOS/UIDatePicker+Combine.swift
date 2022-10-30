@@ -11,7 +11,7 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIDatePicker {
+public extension CombineCocoaPublishers where Base: UIDatePicker {
     /// A publisher emitting date changes from this date picker.
     var date: AnyPublisher<Date, Never> {
         Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.date)

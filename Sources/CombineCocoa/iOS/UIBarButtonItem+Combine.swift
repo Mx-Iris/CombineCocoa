@@ -15,7 +15,7 @@ import UIKit
 extension UIBarButtonItem: HasPublishers {}
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIBarButtonItem {
+public extension CombineCocoaPublishers where Base: UIBarButtonItem {
     /// A publisher which emits whenever this UIBarButtonItem is tapped.
     var tap: AnyPublisher<Void, Never> {
         Publishers.ControlTarget(

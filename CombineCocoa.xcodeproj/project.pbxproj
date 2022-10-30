@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E99EA1A4290D62B7008EAB5D /* CombineCocoa.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1A3290D62B7008EAB5D /* CombineCocoa.swift */; };
 		E99EA1AC290D6C76008EAB5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1AB290D6C76008EAB5D /* AppDelegate.swift */; };
 		E99EA1AE290D6C76008EAB5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1AD290D6C76008EAB5D /* SceneDelegate.swift */; };
 		E99EA1B0290D6C76008EAB5D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1AF290D6C76008EAB5D /* ViewController.swift */; };
@@ -16,29 +15,35 @@
 		E99EA1B8290D6C76008EAB5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E99EA1B6290D6C76008EAB5D /* LaunchScreen.storyboard */; };
 		E99EA1BE290D6C8E008EAB5D /* CombineCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "CombineCocoa::CombineCocoa::Product" /* CombineCocoa.framework */; };
 		E99EA1BF290D6C8E008EAB5D /* CombineCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = "CombineCocoa::CombineCocoa::Product" /* CombineCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E99EA1DF290E1711008EAB5D /* UISlider+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1CA290E1711008EAB5D /* UISlider+Combine.swift */; };
+		E99EA1E0290E1711008EAB5D /* UITableView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1CB290E1711008EAB5D /* UITableView+Combine.swift */; };
+		E99EA1E1290E1711008EAB5D /* UISearchBar+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1CC290E1711008EAB5D /* UISearchBar+Combine.swift */; };
+		E99EA1E2290E1711008EAB5D /* UIControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1CD290E1711008EAB5D /* UIControl+Combine.swift */; };
+		E99EA1E3290E1711008EAB5D /* UISwitch+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1CE290E1711008EAB5D /* UISwitch+Combine.swift */; };
+		E99EA1E4290E1711008EAB5D /* UIGestureRecognizer+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1CF290E1711008EAB5D /* UIGestureRecognizer+Combine.swift */; };
+		E99EA1E5290E1711008EAB5D /* UIPageControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D0290E1711008EAB5D /* UIPageControl+Combine.swift */; };
+		E99EA1E6290E1711008EAB5D /* UIStepper+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D1290E1711008EAB5D /* UIStepper+Combine.swift */; };
+		E99EA1E7290E1711008EAB5D /* UIButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D2290E1711008EAB5D /* UIButton+Combine.swift */; };
+		E99EA1E8290E1711008EAB5D /* UISegmentedControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D3290E1711008EAB5D /* UISegmentedControl+Combine.swift */; };
+		E99EA1E9290E1711008EAB5D /* UITextView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D4290E1711008EAB5D /* UITextView+Combine.swift */; };
+		E99EA1EA290E1711008EAB5D /* NSTextStorage+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D5290E1711008EAB5D /* NSTextStorage+Combine.swift */; };
+		E99EA1EB290E1711008EAB5D /* UIScrollView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D6290E1711008EAB5D /* UIScrollView+Combine.swift */; };
+		E99EA1EC290E1711008EAB5D /* UICollectionView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D7290E1711008EAB5D /* UICollectionView+Combine.swift */; };
+		E99EA1ED290E1711008EAB5D /* UIDatePicker+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1D8290E1711008EAB5D /* UIDatePicker+Combine.swift */; };
+		E99EA1EE290E1711008EAB5D /* TableViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1DA290E1711008EAB5D /* TableViewDelegateProxy.swift */; };
+		E99EA1EF290E1711008EAB5D /* TableViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1DB290E1711008EAB5D /* TableViewDataSourceProxy.swift */; };
+		E99EA1F0290E1711008EAB5D /* UIRefreshControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1DC290E1711008EAB5D /* UIRefreshControl+Combine.swift */; };
+		E99EA1F1290E1711008EAB5D /* UITextField+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1DD290E1711008EAB5D /* UITextField+Combine.swift */; };
+		E99EA1F2290E1711008EAB5D /* UIBarButtonItem+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1DE290E1711008EAB5D /* UIBarButtonItem+Combine.swift */; };
+		E99EA1F4290E1722008EAB5D /* CombineCocoaPublishers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1F3290E1722008EAB5D /* CombineCocoaPublishers.swift */; };
+		E99EA1F7290E17B0008EAB5D /* Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1F6290E17B0008EAB5D /* Binder.swift */; };
+		E99EA1F9290E1D87008EAB5D /* Publisher+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1F8290E1D87008EAB5D /* Publisher+Bind.swift */; };
+		E99EA1FB290E1DB7008EAB5D /* CombineCocoaBinders.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1FA290E1DB7008EAB5D /* CombineCocoaBinders.swift */; };
 		OBJ_101 /* ObjcDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* ObjcDelegateProxy.m */; };
 		OBJ_62 /* AnimatedAssignSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* AnimatedAssignSubscriber.swift */; };
 		OBJ_63 /* CombineControlEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* CombineControlEvent.swift */; };
 		OBJ_64 /* CombineControlProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* CombineControlProperty.swift */; };
 		OBJ_65 /* CombineControlTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* CombineControlTarget.swift */; };
-		OBJ_66 /* NSTextStorage+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* NSTextStorage+Combine.swift */; };
-		OBJ_67 /* UIBarButtonItem+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* UIBarButtonItem+Combine.swift */; };
-		OBJ_68 /* UIButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* UIButton+Combine.swift */; };
-		OBJ_69 /* UICollectionView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* UICollectionView+Combine.swift */; };
-		OBJ_70 /* UIControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* UIControl+Combine.swift */; };
-		OBJ_71 /* UIDatePicker+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* UIDatePicker+Combine.swift */; };
-		OBJ_72 /* UIGestureRecognizer+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* UIGestureRecognizer+Combine.swift */; };
-		OBJ_73 /* UIPageControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* UIPageControl+Combine.swift */; };
-		OBJ_74 /* UIRefreshControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* UIRefreshControl+Combine.swift */; };
-		OBJ_75 /* UIScrollView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* UIScrollView+Combine.swift */; };
-		OBJ_76 /* UISearchBar+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* UISearchBar+Combine.swift */; };
-		OBJ_77 /* UISegmentedControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* UISegmentedControl+Combine.swift */; };
-		OBJ_78 /* UISlider+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* UISlider+Combine.swift */; };
-		OBJ_79 /* UIStepper+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* UIStepper+Combine.swift */; };
-		OBJ_80 /* UISwitch+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* UISwitch+Combine.swift */; };
-		OBJ_81 /* UITableView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* UITableView+Combine.swift */; };
-		OBJ_82 /* UITextField+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* UITextField+Combine.swift */; };
-		OBJ_83 /* UITextView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* UITextView+Combine.swift */; };
 		OBJ_84 /* DelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* DelegateProxy.swift */; };
 		OBJ_85 /* DelegateProxyPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* DelegateProxyPublisher.swift */; };
 		OBJ_86 /* DelegateProxyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* DelegateProxyType.swift */; };
@@ -80,7 +85,6 @@
 /* Begin PBXFileReference section */
 		"CombineCocoa::CombineCocoa::Product" /* CombineCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CombineCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"CombineCocoa::Runtime::Product" /* Runtime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Runtime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E99EA1A3290D62B7008EAB5D /* CombineCocoa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineCocoa.swift; sourceTree = "<group>"; };
 		E99EA1A9290D6C76008EAB5D /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99EA1AB290D6C76008EAB5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E99EA1AD290D6C76008EAB5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,28 +93,34 @@
 		E99EA1B4290D6C76008EAB5D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E99EA1B7290D6C76008EAB5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E99EA1B9290D6C76008EAB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E99EA1CA290E1711008EAB5D /* UISlider+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISlider+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1CB290E1711008EAB5D /* UITableView+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1CC290E1711008EAB5D /* UISearchBar+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1CD290E1711008EAB5D /* UIControl+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1CE290E1711008EAB5D /* UISwitch+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISwitch+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1CF290E1711008EAB5D /* UIGestureRecognizer+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D0290E1711008EAB5D /* UIPageControl+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIPageControl+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D1290E1711008EAB5D /* UIStepper+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStepper+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D2290E1711008EAB5D /* UIButton+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D3290E1711008EAB5D /* UISegmentedControl+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D4290E1711008EAB5D /* UITextView+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D5290E1711008EAB5D /* NSTextStorage+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D6290E1711008EAB5D /* UIScrollView+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D7290E1711008EAB5D /* UICollectionView+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1D8290E1711008EAB5D /* UIDatePicker+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1DA290E1711008EAB5D /* TableViewDelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDelegateProxy.swift; sourceTree = "<group>"; };
+		E99EA1DB290E1711008EAB5D /* TableViewDataSourceProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewDataSourceProxy.swift; sourceTree = "<group>"; };
+		E99EA1DC290E1711008EAB5D /* UIRefreshControl+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1DD290E1711008EAB5D /* UITextField+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1DE290E1711008EAB5D /* UIBarButtonItem+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Combine.swift"; sourceTree = "<group>"; };
+		E99EA1F3290E1722008EAB5D /* CombineCocoaPublishers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineCocoaPublishers.swift; sourceTree = "<group>"; };
+		E99EA1F6290E17B0008EAB5D /* Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binder.swift; sourceTree = "<group>"; };
+		E99EA1F8290E1D87008EAB5D /* Publisher+Bind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Bind.swift"; sourceTree = "<group>"; };
+		E99EA1FA290E1DB7008EAB5D /* CombineCocoaBinders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineCocoaBinders.swift; sourceTree = "<group>"; };
 		OBJ_10 /* AnimatedAssignSubscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedAssignSubscriber.swift; sourceTree = "<group>"; };
 		OBJ_11 /* CombineControlEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineControlEvent.swift; sourceTree = "<group>"; };
 		OBJ_12 /* CombineControlProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineControlProperty.swift; sourceTree = "<group>"; };
 		OBJ_13 /* CombineControlTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineControlTarget.swift; sourceTree = "<group>"; };
-		OBJ_15 /* NSTextStorage+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_16 /* UIBarButtonItem+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_17 /* UIButton+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_18 /* UICollectionView+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_19 /* UIControl+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_20 /* UIDatePicker+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDatePicker+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_21 /* UIGestureRecognizer+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIGestureRecognizer+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_22 /* UIPageControl+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageControl+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_23 /* UIRefreshControl+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_24 /* UIScrollView+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_25 /* UISearchBar+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_26 /* UISegmentedControl+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_27 /* UISlider+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISlider+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_28 /* UIStepper+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStepper+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_29 /* UISwitch+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwitch+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_30 /* UITableView+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_31 /* UITextField+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Combine.swift"; sourceTree = "<group>"; };
-		OBJ_32 /* UITextView+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Combine.swift"; sourceTree = "<group>"; };
 		OBJ_34 /* DelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateProxy.swift; sourceTree = "<group>"; };
 		OBJ_35 /* DelegateProxyPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateProxyPublisher.swift; sourceTree = "<group>"; };
 		OBJ_36 /* DelegateProxyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateProxyType.swift; sourceTree = "<group>"; };
@@ -180,30 +190,48 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		OBJ_14 /* Controls */ = {
+		E99EA1C9290E1711008EAB5D /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				E99EA1A3290D62B7008EAB5D /* CombineCocoa.swift */,
-				OBJ_15 /* NSTextStorage+Combine.swift */,
-				OBJ_16 /* UIBarButtonItem+Combine.swift */,
-				OBJ_17 /* UIButton+Combine.swift */,
-				OBJ_18 /* UICollectionView+Combine.swift */,
-				OBJ_19 /* UIControl+Combine.swift */,
-				OBJ_20 /* UIDatePicker+Combine.swift */,
-				OBJ_21 /* UIGestureRecognizer+Combine.swift */,
-				OBJ_22 /* UIPageControl+Combine.swift */,
-				OBJ_23 /* UIRefreshControl+Combine.swift */,
-				OBJ_24 /* UIScrollView+Combine.swift */,
-				OBJ_25 /* UISearchBar+Combine.swift */,
-				OBJ_26 /* UISegmentedControl+Combine.swift */,
-				OBJ_27 /* UISlider+Combine.swift */,
-				OBJ_28 /* UIStepper+Combine.swift */,
-				OBJ_29 /* UISwitch+Combine.swift */,
-				OBJ_30 /* UITableView+Combine.swift */,
-				OBJ_31 /* UITextField+Combine.swift */,
-				OBJ_32 /* UITextView+Combine.swift */,
+				E99EA1D9290E1711008EAB5D /* Proxies */,
+				E99EA1D5290E1711008EAB5D /* NSTextStorage+Combine.swift */,
+				E99EA1DE290E1711008EAB5D /* UIBarButtonItem+Combine.swift */,
+				E99EA1D2290E1711008EAB5D /* UIButton+Combine.swift */,
+				E99EA1D7290E1711008EAB5D /* UICollectionView+Combine.swift */,
+				E99EA1CD290E1711008EAB5D /* UIControl+Combine.swift */,
+				E99EA1D8290E1711008EAB5D /* UIDatePicker+Combine.swift */,
+				E99EA1CF290E1711008EAB5D /* UIGestureRecognizer+Combine.swift */,
+				E99EA1D0290E1711008EAB5D /* UIPageControl+Combine.swift */,
+				E99EA1DC290E1711008EAB5D /* UIRefreshControl+Combine.swift */,
+				E99EA1D6290E1711008EAB5D /* UIScrollView+Combine.swift */,
+				E99EA1CC290E1711008EAB5D /* UISearchBar+Combine.swift */,
+				E99EA1D3290E1711008EAB5D /* UISegmentedControl+Combine.swift */,
+				E99EA1CA290E1711008EAB5D /* UISlider+Combine.swift */,
+				E99EA1D1290E1711008EAB5D /* UIStepper+Combine.swift */,
+				E99EA1CE290E1711008EAB5D /* UISwitch+Combine.swift */,
+				E99EA1CB290E1711008EAB5D /* UITableView+Combine.swift */,
+				E99EA1DD290E1711008EAB5D /* UITextField+Combine.swift */,
+				E99EA1D4290E1711008EAB5D /* UITextView+Combine.swift */,
 			);
-			path = Controls;
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		E99EA1D9290E1711008EAB5D /* Proxies */ = {
+			isa = PBXGroup;
+			children = (
+				E99EA1DA290E1711008EAB5D /* TableViewDelegateProxy.swift */,
+				E99EA1DB290E1711008EAB5D /* TableViewDataSourceProxy.swift */,
+			);
+			path = Proxies;
+			sourceTree = "<group>";
+		};
+		E99EA1F5290E1769008EAB5D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E99EA1F6290E17B0008EAB5D /* Binder.swift */,
+				E99EA1F8290E1D87008EAB5D /* Publisher+Bind.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		OBJ_33 /* DelegateProxy */ = {
@@ -288,11 +316,14 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* CombineCocoa.h */,
+				E99EA1F3290E1722008EAB5D /* CombineCocoaPublishers.swift */,
+				E99EA1FA290E1DB7008EAB5D /* CombineCocoaBinders.swift */,
 				OBJ_10 /* AnimatedAssignSubscriber.swift */,
 				OBJ_11 /* CombineControlEvent.swift */,
 				OBJ_12 /* CombineControlProperty.swift */,
 				OBJ_13 /* CombineControlTarget.swift */,
-				OBJ_14 /* Controls */,
+				E99EA1F5290E1769008EAB5D /* Common */,
+				E99EA1C9290E1711008EAB5D /* iOS */,
 				OBJ_33 /* DelegateProxy */,
 			);
 			name = CombineCocoa;
@@ -442,30 +473,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				E99EA1E3290E1711008EAB5D /* UISwitch+Combine.swift in Sources */,
+				E99EA1F9290E1D87008EAB5D /* Publisher+Bind.swift in Sources */,
+				E99EA1DF290E1711008EAB5D /* UISlider+Combine.swift in Sources */,
+				E99EA1F1290E1711008EAB5D /* UITextField+Combine.swift in Sources */,
 				OBJ_62 /* AnimatedAssignSubscriber.swift in Sources */,
+				E99EA1F2290E1711008EAB5D /* UIBarButtonItem+Combine.swift in Sources */,
 				OBJ_63 /* CombineControlEvent.swift in Sources */,
 				OBJ_64 /* CombineControlProperty.swift in Sources */,
 				OBJ_65 /* CombineControlTarget.swift in Sources */,
-				OBJ_66 /* NSTextStorage+Combine.swift in Sources */,
-				OBJ_67 /* UIBarButtonItem+Combine.swift in Sources */,
-				OBJ_68 /* UIButton+Combine.swift in Sources */,
-				OBJ_69 /* UICollectionView+Combine.swift in Sources */,
-				OBJ_70 /* UIControl+Combine.swift in Sources */,
-				OBJ_71 /* UIDatePicker+Combine.swift in Sources */,
-				OBJ_72 /* UIGestureRecognizer+Combine.swift in Sources */,
-				OBJ_73 /* UIPageControl+Combine.swift in Sources */,
-				OBJ_74 /* UIRefreshControl+Combine.swift in Sources */,
-				OBJ_75 /* UIScrollView+Combine.swift in Sources */,
-				OBJ_76 /* UISearchBar+Combine.swift in Sources */,
-				OBJ_77 /* UISegmentedControl+Combine.swift in Sources */,
-				OBJ_78 /* UISlider+Combine.swift in Sources */,
-				E99EA1A4290D62B7008EAB5D /* CombineCocoa.swift in Sources */,
-				OBJ_79 /* UIStepper+Combine.swift in Sources */,
-				OBJ_80 /* UISwitch+Combine.swift in Sources */,
-				OBJ_81 /* UITableView+Combine.swift in Sources */,
-				OBJ_82 /* UITextField+Combine.swift in Sources */,
-				OBJ_83 /* UITextView+Combine.swift in Sources */,
+				E99EA1F4290E1722008EAB5D /* CombineCocoaPublishers.swift in Sources */,
+				E99EA1EC290E1711008EAB5D /* UICollectionView+Combine.swift in Sources */,
+				E99EA1FB290E1DB7008EAB5D /* CombineCocoaBinders.swift in Sources */,
+				E99EA1EA290E1711008EAB5D /* NSTextStorage+Combine.swift in Sources */,
+				E99EA1E7290E1711008EAB5D /* UIButton+Combine.swift in Sources */,
+				E99EA1EB290E1711008EAB5D /* UIScrollView+Combine.swift in Sources */,
+				E99EA1F0290E1711008EAB5D /* UIRefreshControl+Combine.swift in Sources */,
+				E99EA1E4290E1711008EAB5D /* UIGestureRecognizer+Combine.swift in Sources */,
+				E99EA1E1290E1711008EAB5D /* UISearchBar+Combine.swift in Sources */,
+				E99EA1EF290E1711008EAB5D /* TableViewDataSourceProxy.swift in Sources */,
+				E99EA1EE290E1711008EAB5D /* TableViewDelegateProxy.swift in Sources */,
+				E99EA1E2290E1711008EAB5D /* UIControl+Combine.swift in Sources */,
+				E99EA1E0290E1711008EAB5D /* UITableView+Combine.swift in Sources */,
+				E99EA1E9290E1711008EAB5D /* UITextView+Combine.swift in Sources */,
+				E99EA1E5290E1711008EAB5D /* UIPageControl+Combine.swift in Sources */,
+				E99EA1F7290E17B0008EAB5D /* Binder.swift in Sources */,
 				OBJ_84 /* DelegateProxy.swift in Sources */,
+				E99EA1E8290E1711008EAB5D /* UISegmentedControl+Combine.swift in Sources */,
+				E99EA1E6290E1711008EAB5D /* UIStepper+Combine.swift in Sources */,
+				E99EA1ED290E1711008EAB5D /* UIDatePicker+Combine.swift in Sources */,
 				OBJ_85 /* DelegateProxyPublisher.swift in Sources */,
 				OBJ_86 /* DelegateProxyType.swift in Sources */,
 			);

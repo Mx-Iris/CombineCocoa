@@ -12,7 +12,7 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIScrollView {
+public extension CombineCocoaPublishers where Base: UIScrollView {
     /// A publisher emitting content offset changes from this UIScrollView.
     var contentOffset: AnyPublisher<CGPoint, Never> {
         base.publisher(for: \.contentOffset)

@@ -14,7 +14,7 @@ extension UITableView: HasPublishers {}
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UITableView {
+public extension CombineCocoaPublishers where Base: UITableView {
     var delegateProxy: TableViewDelegateProxy {
         .createDelegateProxy(for: base)
     }
@@ -125,7 +125,7 @@ public extension CombineCocoa where Base: UITableView {
 }
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UITableView {
+public extension CombineCocoaPublishers where Base: UITableView {
     var dataSourceProxy: TableViewDataSourceProxy {
         .createDelegateProxy(for: base)
     }

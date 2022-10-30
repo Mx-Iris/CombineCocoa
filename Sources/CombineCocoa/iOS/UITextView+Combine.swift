@@ -11,7 +11,7 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UITextView {
+public extension CombineCocoaPublishers where Base: UITextView {
     /// A Combine publisher for the `UITextView's` value.
     ///
     /// - note: This uses the underlying `NSTextStorage` to make sure

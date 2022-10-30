@@ -13,7 +13,7 @@ import UIKit
 // MARK: - Gesture Publishers
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UITapGestureRecognizer {
+public extension CombineCocoaPublishers where Base: UITapGestureRecognizer {
     /// A publisher which emits when this Tap Gesture Recognizer is triggered
     var tap: AnyPublisher<UITapGestureRecognizer, Never> {
         gesturePublisher(for: base)
@@ -21,7 +21,7 @@ public extension CombineCocoa where Base: UITapGestureRecognizer {
 }
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIPinchGestureRecognizer {
+public extension CombineCocoaPublishers where Base: UIPinchGestureRecognizer {
     /// A publisher which emits when this Pinch Gesture Recognizer is triggered
     var pinch: AnyPublisher<UIPinchGestureRecognizer, Never> {
         gesturePublisher(for: base)
@@ -29,7 +29,7 @@ public extension CombineCocoa where Base: UIPinchGestureRecognizer {
 }
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIRotationGestureRecognizer {
+public extension CombineCocoaPublishers where Base: UIRotationGestureRecognizer {
     /// A publisher which emits when this Rotation Gesture Recognizer is triggered
     var rotation: AnyPublisher<UIRotationGestureRecognizer, Never> {
         gesturePublisher(for: base)
@@ -37,7 +37,7 @@ public extension CombineCocoa where Base: UIRotationGestureRecognizer {
 }
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UISwipeGestureRecognizer {
+public extension CombineCocoaPublishers where Base: UISwipeGestureRecognizer {
     /// A publisher which emits when this Swipe Gesture Recognizer is triggered
     var swipe: AnyPublisher<UISwipeGestureRecognizer, Never> {
         gesturePublisher(for: base)
@@ -45,7 +45,7 @@ public extension CombineCocoa where Base: UISwipeGestureRecognizer {
 }
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIPanGestureRecognizer {
+public extension CombineCocoaPublishers where Base: UIPanGestureRecognizer {
     /// A publisher which emits when this Pan Gesture Recognizer is triggered
     var pan: AnyPublisher<UIPanGestureRecognizer, Never> {
         gesturePublisher(for: base)
@@ -53,7 +53,7 @@ public extension CombineCocoa where Base: UIPanGestureRecognizer {
 }
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIScreenEdgePanGestureRecognizer {
+public extension CombineCocoaPublishers where Base: UIScreenEdgePanGestureRecognizer {
     /// A publisher which emits when this Screen Edge Gesture Recognizer is triggered
     var screenEdgePan: AnyPublisher<UIScreenEdgePanGestureRecognizer, Never> {
         gesturePublisher(for: base)
@@ -61,7 +61,7 @@ public extension CombineCocoa where Base: UIScreenEdgePanGestureRecognizer {
 }
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UILongPressGestureRecognizer {
+public extension CombineCocoaPublishers where Base: UILongPressGestureRecognizer {
     /// A publisher which emits when this Long Press Recognizer is triggered
     var longPress: AnyPublisher<UILongPressGestureRecognizer, Never> {
         gesturePublisher(for: base)

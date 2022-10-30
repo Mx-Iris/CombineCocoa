@@ -11,7 +11,7 @@ import UIKit
 import Combine
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UITextField {
+public extension CombineCocoaPublishers where Base: UITextField {
     /// A publisher emitting any text changes to a this text field.
     var text: AnyPublisher<String?, Never> {
         Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.text)

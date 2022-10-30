@@ -11,7 +11,7 @@ import Combine
 import UIKit
 
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UIRefreshControl {
+public extension CombineCocoaPublishers where Base: UIRefreshControl {
     /// A publisher emitting refresh status changes from this refresh control.
     var isRefreshing: AnyPublisher<Bool, Never> {
         Publishers.ControlProperty(control: base, events: .defaultValueEvents, keyPath: \.isRefreshing)

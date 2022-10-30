@@ -12,7 +12,7 @@ import Combine
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
-public extension CombineCocoa where Base: UICollectionView {
+public extension CombineCocoaPublishers where Base: UICollectionView {
     /// Combine wrapper for `collectionView(_:didSelectItemAt:)`
     var didSelectItem: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UICollectionViewDelegate.collectionView(_:didSelectItemAt:))
