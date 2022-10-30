@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E91D685B290E969C00CB6664 /* KeyValueObservingBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91D685A290E969C00CB6664 /* KeyValueObservingBinder.swift */; };
 		E99EA1AC290D6C76008EAB5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1AB290D6C76008EAB5D /* AppDelegate.swift */; };
 		E99EA1AE290D6C76008EAB5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1AD290D6C76008EAB5D /* SceneDelegate.swift */; };
 		E99EA1B0290D6C76008EAB5D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99EA1AF290D6C76008EAB5D /* ViewController.swift */; };
@@ -85,6 +86,7 @@
 /* Begin PBXFileReference section */
 		"CombineCocoa::CombineCocoa::Product" /* CombineCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CombineCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"CombineCocoa::Runtime::Product" /* Runtime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Runtime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E91D685A290E969C00CB6664 /* KeyValueObservingBinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueObservingBinder.swift; sourceTree = "<group>"; };
 		E99EA1A9290D6C76008EAB5D /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E99EA1AB290D6C76008EAB5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E99EA1AD290D6C76008EAB5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				E99EA1F6290E17B0008EAB5D /* Binder.swift */,
+				E91D685A290E969C00CB6664 /* KeyValueObservingBinder.swift */,
 				E99EA1F8290E1D87008EAB5D /* Publisher+Bind.swift */,
 			);
 			path = Common;
@@ -474,6 +477,7 @@
 			buildActionMask = 0;
 			files = (
 				E99EA1E3290E1711008EAB5D /* UISwitch+Combine.swift in Sources */,
+				E91D685B290E969C00CB6664 /* KeyValueObservingBinder.swift in Sources */,
 				E99EA1F9290E1D87008EAB5D /* Publisher+Bind.swift in Sources */,
 				E99EA1DF290E1711008EAB5D /* UISlider+Combine.swift in Sources */,
 				E99EA1F1290E1711008EAB5D /* UITextField+Combine.swift in Sources */,
