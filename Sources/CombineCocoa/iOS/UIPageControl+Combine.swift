@@ -7,10 +7,10 @@
 //
 
 #if canImport(UIKit)
+
 import Combine
 import UIKit
 
-extension UIPageControl: HasPublishers {}
 
 @available(iOS 13.0, *)
 public extension CombineCocoaPublishers where Base: UIPageControl {

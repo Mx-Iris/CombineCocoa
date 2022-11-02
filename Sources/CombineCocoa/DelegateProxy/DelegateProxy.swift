@@ -8,10 +8,8 @@
 
 import Foundation
 import Combine
-
-#if canImport(Runtime)
 import Runtime
-#endif
+
 
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 open class DelegateProxy<Object: AnyObject, Delegate>: ObjcDelegateProxy {
@@ -59,4 +57,3 @@ open class DelegateProxy<Object: AnyObject, Delegate>: ObjcDelegateProxy {
         subscribers = []
     }
 }
-#endif

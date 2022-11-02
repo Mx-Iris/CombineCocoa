@@ -7,10 +7,9 @@
 //
 
 #if canImport(UIKit)
+
 import UIKit
 import Combine
-
-extension UITableView: HasPublishers {}
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)

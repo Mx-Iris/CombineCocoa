@@ -11,8 +11,6 @@
 import UIKit
 import Combine
 
-extension UITextField: HasPublishers {}
-
 @available(iOS 13.0, *)
 public extension CombineCocoaPublishers where Base: UITextField {
     /// A publisher emitting any text changes to a this text field.

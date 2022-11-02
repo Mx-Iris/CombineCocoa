@@ -7,10 +7,9 @@
 //
 
 #if canImport(UIKit)
+
 import Combine
 import UIKit
-
-extension UIDatePicker: HasPublishers {}
 
 @available(iOS 13.0, *)
 public extension CombineCocoaPublishers where Base: UIDatePicker {
