@@ -6,9 +6,11 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if !(os(iOS) && (arch(i386) || arch(arm)))
+#if canImport(UIKit)
 import UIKit
 import Combine
+
+extension UIScrollView: HasPublishers {}
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)

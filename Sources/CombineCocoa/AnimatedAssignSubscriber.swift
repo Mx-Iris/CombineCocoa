@@ -8,7 +8,7 @@
 
 import Foundation
 
-#if canImport(UIKit) && !(os(iOS) && (arch(i386) || arch(arm)))
+#if canImport(UIKit)
 import Combine
 import UIKit
 

@@ -6,11 +6,12 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if !(os(iOS) && (arch(i386) || arch(arm)))
+#if canImport(UIKit)
 import Combine
 import UIKit
 
 extension UIControl: HasPublishers {}
+extension UIControl: HasBinders {}
 
 @available(iOS 13.0, *)
 public extension CombineCocoaPublishers where Base: UIControl {

@@ -6,9 +6,11 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if canImport(UIKit) && !(os(iOS) && (arch(i386) || arch(arm)))
+#if canImport(UIKit)
 import UIKit
 import Combine
+
+extension UICollectionView: HasPublishers {}
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)

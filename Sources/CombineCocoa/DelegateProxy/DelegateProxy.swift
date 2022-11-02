@@ -6,7 +6,6 @@
 //  Copyright © 2020 Combine Community. All rights reserved.
 //
 
-#if !(os(iOS) && (arch(i386) || arch(arm)))
 import Foundation
 import Combine
 
