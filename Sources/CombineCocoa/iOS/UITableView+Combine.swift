@@ -136,14 +136,14 @@ public extension CombineCocoaPublishers where Base: UITableView {
             .map { $0[2] as! IndexPath }
             .eraseToAnyPublisher()
     }
-    
+
     var didMoveRow: AnyPublisher<(source: IndexPath, destination: IndexPath), Never> {
         let selector = #selector(UITableViewDataSource.tableView(_:moveRowAt:to:))
         return dataSourceProxy.interceptSelectorPublisher(selector)
             .map { ($0[1] as! IndexPath, $0[2] as! IndexPath) }
             .eraseToAnyPublisher()
     }
-    
+
     var didInsertRow: AnyPublisher<IndexPath, Never> {
         let selector = #selector(UITableViewDataSource.tableView(_:commit:forRowAt:))
         return dataSourceProxy.interceptSelectorPublisher(selector)
@@ -151,7 +151,24 @@ public extension CombineCocoaPublishers where Base: UITableView {
             .map { $0[2] as! IndexPath }
             .eraseToAnyPublisher()
     }
-    
+}
+
+@available(iOS 13.0, *)
+public extension CombineCocoaBinders where Base: UITableView {
+    func items<Section, Item>(_ dataSource: UITableViewDiffableDataSource<Section, Item>, animatingDifferences: Bool) -> AnySubscriber<NSDiffableDataSourceSnapshot<Section, Item>, Never> {
+        AnySubscriber<NSDiffableDataSourceSnapshot<Section, Item>, Never> { subscription in
+            subscription.request(.unlimited)
+        } receiveValue: { [weak view = base as UITableView] snapshot -> Subscribers.Demand in
+            guard let view = view else { return .none }
+            if let currentDataSource = view.dataSource as? UITableViewDiffableDataSource<Section, Item> {
+                currentDataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+            } else {
+                view.dataSource = dataSource
+                dataSource.apply(snapshot, animatingDifferences: animatingDifferences)
+            }
+            return .unlimited
+        } receiveCompletion: { _ in }
+    }
 }
 
 #endif
