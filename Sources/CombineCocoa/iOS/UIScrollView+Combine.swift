@@ -11,6 +11,7 @@ import UIKit
 import Combine
 
 extension UIScrollView: HasPublishers {}
+extension UIScrollView: HasBinders {}
 
 // swiftlint:disable force_cast
 @available(iOS 13.0, *)
