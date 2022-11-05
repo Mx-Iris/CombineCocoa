@@ -37,6 +37,10 @@ open class TableViewDataSourceProxy: DelegateProxy<UITableView, UITableViewDataS
         super.init(object: object)
     }
 
+    public override func forwardToDelegate() -> UITableViewDataSource? {
+        return requiredMethodsDataSource
+    }
+    
     open override func setForwardToDelegate(_ delegate: UITableViewDataSource?) {
         requiredMethodsDataSource = delegate
         super.setForwardToDelegate(delegate)
