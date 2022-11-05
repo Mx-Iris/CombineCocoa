@@ -12,7 +12,7 @@ import ObjectiveC.runtime
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol DelegateProxyType: AnyObject {
     associatedtype Object: AnyObject
-    associatedtype Delegate
+    associatedtype Delegate: AnyObject
     var object: Object? { get }
     static var identifier: UnsafeRawPointer { get }
     init(object: Object)
@@ -38,8 +38,13 @@ public extension DelegateProxyType {
         }
 
         let currentDelegate = delegateProxy.currentDelegate()
-        delegateProxy.setForwardToDelegate(currentDelegate)
-        delegateProxy.setCurrentDelegate(delegateProxy as? Delegate)
+
+        if currentDelegate !== delegateProxy {
+            delegateProxy.setForwardToDelegate(currentDelegate)
+            
+            delegateProxy.setCurrentDelegate(delegateProxy as? Delegate)
+            
+        }
 
         return delegateProxy
     }

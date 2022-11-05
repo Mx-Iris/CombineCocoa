@@ -30,19 +30,15 @@ private class TableViewDataSourceNotSet: NSObject, UITableViewDataSource {
 open class TableViewDataSourceProxy: DelegateProxy<UITableView, UITableViewDataSource>, DelegateProxyType, UITableViewDataSource {
     public weak var object: UITableView?
 
-    private weak var requiredMethodsDataSource: UITableViewDataSource?
+    private weak var requiredMethodsDataSource: UITableViewDataSource? = tableViewDataSourceNotSet
 
     public required init(object: UITableView) {
         self.object = object
         super.init(object: object)
     }
-
-    public override func forwardToDelegate() -> UITableViewDataSource? {
-        return requiredMethodsDataSource
-    }
     
     open override func setForwardToDelegate(_ delegate: UITableViewDataSource?) {
-        requiredMethodsDataSource = delegate
+        requiredMethodsDataSource = delegate ?? tableViewDataSourceNotSet
         super.setForwardToDelegate(delegate)
     }
 
