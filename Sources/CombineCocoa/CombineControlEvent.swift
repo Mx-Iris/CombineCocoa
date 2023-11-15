@@ -60,7 +60,7 @@ extension Combine.Publishers.ControlEvent {
         init(subscriber: S, control: Control, event: Control.Event) {
             self.subscriber = subscriber
             self.control = control
-            control.addTarget(self, action: #selector(handleEvent), for: event)
+            control.addTarget(self, action: #selector(processControlEvent), for: event)
         }
 
         func request(_ demand: Subscribers.Demand) {
@@ -72,7 +72,7 @@ extension Combine.Publishers.ControlEvent {
             subscriber = nil
         }
 
-        @objc private func handleEvent() {
+        @objc private func processControlEvent() {
             _ = subscriber?.receive()
         }
     }
